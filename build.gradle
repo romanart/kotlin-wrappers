@@ -5,6 +5,7 @@ buildscript {
     apply from: 'versions.gradle'
 
     repositories {
+        // mavenLocal()
         maven { url "https://dl.bintray.com/kotlin/kotlin-dev" }
         maven { url "https://kotlin.bintray.com/kotlinx" }
         mavenCentral()
@@ -23,6 +24,7 @@ buildscript {
 
 subprojects {
     repositories {
+        // mavenLocal()
         maven { url "https://dl.bintray.com/kotlin/kotlin-dev" }
         maven { url "https://kotlin.bintray.com/kotlinx" }
         jcenter()
@@ -47,6 +49,13 @@ subprojects {
                 moduleKind = "commonjs"
                 sourceMap = true
                 sourceMapEmbedSources = "always"
+                freeCompilerArgs += ["-Xir-produce-klib-dir", "-Xir-only"]
+            }
+        }
+
+        compileTestKotlin2Js {
+            kotlinOptions {
+                freeCompilerArgs += ["-Xir-produce-js"]
             }
         }
     }
